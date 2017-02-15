@@ -1,0 +1,35 @@
+md-input-container:not(.md-input-has-value) input:not(:focus), md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-ampm-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-day-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-hour-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-millisecond-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-minute-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-month-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-second-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-text, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-week-field, md-input-container:not(.md-input-has-value) input:not(:focus)::-webkit-datetime-edit-year-field {
+    color: black;
+}
+
+.md-button {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 1px;
+  display: block;
+  margin: 0 auto;
+}
+
+.md-button.md-default-theme[disabled], .md-button[disabled] {
+    background-color: gray;
+    color:white;
+}
+
+.box{
+    padding: 10px;
+    border: 1px solid #f1f1f1;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    background-color: white;
+    margin-top: 40px;
+}
+
+body{
+  background-color: #f1f1f1;
+}
+
+.hint{
+  text-align: center;
+  color: #4CAF50;
+  font-weight: bold;
+}
