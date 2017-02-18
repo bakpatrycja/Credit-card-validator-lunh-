@@ -12,25 +12,18 @@
         <div layout="row" layout-align="center center">
             <div flex="30">
                 <div class="box">
+
               <form name="projectForm">
 								<div class="hint hint-custom" ng-show="notification">{{ notification }}</div>
                       <md-input-container class="md-block">
-                         <label>Card number</label>
-                         <input type="number" required name="card" ng-model="fields.project.card"
-                               ng-pattern="/^[0-9]{4}[0-9]{3}[0-9]{4}$/" />
-
-                         <div ng-messages="projectForm.card.$error" multiple>
-                           <div ng-message="required">
-                             Card number is required.
-                           </div>
-                           <div ng-message="pattern">
-                             11112223333
-                           </div>
-                         </div>
+                        <div ng-form='myForm'>
+                          <label>Card number </label>
+                         <input ng-required="true" type='tel' ng-model='myNumber.project.card' name='card' luhn-check
+                          minLength = "15" maxLength = "16"/>
+                        </div>
                        </md-input-container>
                         <label>Expiration Date</label>
                       <div layout="row">
-
                         <md-input-container flex="50">
                           <label>Month</label>
                           <md-select name="month" ng-model="fields.project.month" required>
@@ -73,7 +66,7 @@
                       <md-input-container class="md-block" flex="50">
                          <label>CVV</label>
                          <input required name="cvv" ng-model="fields.project.cvv"
-                               ng-pattern="/^[0-9]{1}[0-9]{1}[0-9]{1}$/" />
+                               minlength="3" maxlength="4" />
 
                          <div ng-messages="projectForm.cvv.$error" multiple>
                            <div ng-message="required">
@@ -110,10 +103,12 @@
   </div>
 </div>
 <script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular/angular_card_input.js"></script>
 <script src="node_modules/angular-material/angular-material.min.js"></script>
 <script src="node_modules/angular-animate/angular-animate.min.js"></script>
 <script src="node_modules/angular-aria/angular-aria.min.js"></script>
 <script src="js/app.js"></script>
 <script src="node_modules/angular-messages/angular-messages.js"></script>
+
 </body>
 </html>

@@ -3,6 +3,50 @@
 
     var myApp = angular.module('myApp', ['ngMaterial', 'ngMessages']);
 
+/**
+ * Based on https://gist.github.com/ShirtlessKirk/2134376
+ * Variant of Avraham Plotnitzky's String.prototype method mixed with the "fast" version
+ * see: https://sites.google.com/site/abapexamples/javascript/luhn-validation
+ * @author ShirtlessKirk. Copyright (c) 2012.
+ * Licensed under WTFPL (http://www.wtfpl.net/txt/copying)
+ */
+var luhnChk = function(luhn) {
+  var len = luhn.length,
+    mul = 0,
+    prodArr = [
+      [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      [0, 2, 4, 6, 8, 1, 3, 5, 7, 9]
+    ],
+    sum = 0;
+
+  while (len--) {
+    sum += prodArr[mul][parseInt(luhn.charAt(len), 10)];
+    mul ^= 1;
+  }
+
+  return sum % 10 === 0 && sum > 0;
+};
+
+
+myApp.directive('luhnCheck', function() {
+  return {
+    restrict: 'A',
+    require: 'ngModel',
+    link: function(scope, element, attributes, ngModel) {
+
+      function luhnCheck(value) {
+                    ngModel.$setValidity('luhn-check', luhnChk(value));
+                    return value;
+      }
+
+      ngModel.$parsers.push(luhnCheck);
+      ngModel.$formatters.push(luhnCheck);
+    }
+
+  };
+})
+
+
     myApp.config(function($mdThemingProvider) {
         $mdThemingProvider.theme('default')
             .primaryPalette('indigo', {
@@ -16,6 +60,7 @@
             });
     });
     myApp.controller('AppCtrl', function($scope, $http, $timeout) {
+      $scope.myNumber = null;
         $scope.submitForm = function() {
             $scope.notification = "Form is sending...";
             $timeout(function () {
@@ -25,7 +70,6 @@
 				          console.log("Udało się wysłać POST: " + res);
 			}).error(function() {
     				      console.log("Nie udało się wysłać POST!");
-    				      $scope.notification = 'Formularz nie został wysłany';
 			       });
         };
     });
